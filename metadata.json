@@ -1,0 +1,5 @@
+{
+  "name": "Sheldon Mania",
+  "description": "A visual web implementation of Rock-Paper-Scissors-Lizard-Spock with Sheldon Cooper style commentary using Gemini.",
+  "requestFramePermissions": []
+}
