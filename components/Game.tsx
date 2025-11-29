@@ -1,3 +1,4 @@
+/// <reference types="vite/client" />
 import React, { useState, useEffect } from 'react';
 import { MOVES, SHELDON_VICTORY_QUOTES, SHELDON_DEFEAT_QUOTES, SHELDON_DRAW_QUOTES } from '../constants';
 import { MoveType, GameResult, RoundResult } from '../types';
@@ -128,9 +129,9 @@ export const Game: React.FC<GameProps> = ({ onGameEnd, onResetScore }) => {
               <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full border-4 border-[#4FB3FF] bg-[#0F1A23] overflow-hidden shadow-[0_0_20px_rgba(79,179,255,0.3)] z-10">
                 <img
                   src={
-                    roundResult.result === 'LOSE' ? '/sheldon-feliz.png' :
-                      roundResult.result === 'WIN' ? '/sheldon-triste.png' :
-                        '/sheldon-empate.png'
+                    roundResult.result === 'LOSE' ? `${import.meta.env.BASE_URL}sheldon-feliz.png` :
+                      roundResult.result === 'WIN' ? `${import.meta.env.BASE_URL}sheldon-triste.png` :
+                        `${import.meta.env.BASE_URL}sheldon-empate.png`
                   }
                   alt={
                     roundResult.result === 'LOSE' ? 'Sheldon Feliz' :
