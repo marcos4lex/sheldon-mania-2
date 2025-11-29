@@ -111,3 +111,16 @@ export const SHELDON_DEFEAT_QUOTES = [
   "Eu só posso deduzir que o universo tem senso de humor.",
   "Eu tenho uma explicação: falha sistêmica no meu cérebro. Procedo para reinicialização."
 ];
+
+export const SHELDON_DRAW_QUOTES = [
+  "Tecnicamente, um empate ainda é uma vitória… para a lógica.",
+  "Empatamos porque você jogou bem… e eu joguei perfeitamente.",
+  "Estatisticamente, esse empate só aconteceu porque o universo quis equilibrar a mediocridade de vocês com a minha genialidade.",
+  "Empate? Isso parece falha no design do jogo. Vou escrever um e-mail.",
+  "Não é derrota… mas também não é vitória. É o pior dos dois mundos.",
+  "Eu não perdi. Logo, estou satisfeito.",
+  "Um empate é apenas uma vitória que ainda não percebeu que sou superior.",
+  "Se tivéssemos jogado com as regras que eu sugeri, eu teria ganho.",
+  "Empatar com vocês é estatisticamente improvável… e emocionalmente desconfortável.",
+  "Na próxima rodada, preparem-se para a derrota inevitável. Esse empate foi apenas um erro matemático."
+];

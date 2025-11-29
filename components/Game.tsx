@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MOVES, SHELDON_VICTORY_QUOTES, SHELDON_DEFEAT_QUOTES } from '../constants';
+import { MOVES, SHELDON_VICTORY_QUOTES, SHELDON_DEFEAT_QUOTES, SHELDON_DRAW_QUOTES } from '../constants';
 import { MoveType, GameResult, RoundResult } from '../types';
 import { Button } from './Button';
 import { getSheldonCommentary } from '../services/geminiService';
@@ -61,6 +61,9 @@ export const Game: React.FC<GameProps> = ({ onGameEnd, onResetScore }) => {
     } else if (result === 'WIN') {
       const randomQuote = SHELDON_DEFEAT_QUOTES[Math.floor(Math.random() * SHELDON_DEFEAT_QUOTES.length)];
       setCommentary(randomQuote);
+    } else if (result === 'DRAW') {
+      const randomQuote = SHELDON_DRAW_QUOTES[Math.floor(Math.random() * SHELDON_DRAW_QUOTES.length)];
+      setCommentary(randomQuote);
     } else if (process.env.API_KEY) {
       setLoadingCommentary(true);
       const text = await getSheldonCommentary(newResult);
@@ -120,19 +123,39 @@ export const Game: React.FC<GameProps> = ({ onGameEnd, onResetScore }) => {
           </h2>
 
           {/* Sheldon Commentary Box */}
-          <div className="bg-[#1E6A8F]/20 border border-[#4FB3FF]/30 p-6 rounded-xl max-w-lg mx-auto min-h-[100px] relative">
-            <span className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-[#0F1A23] px-3 text-[#4FB3FF] text-xs font-bold uppercase tracking-wider">
-              Sheldon Diz
-            </span>
-            {loadingCommentary ? (
-              <div className="flex items-center justify-center h-full">
-                <div className="animate-pulse text-[#4FB3FF]">Thinking...</div>
+          <div className="relative mt-16 max-w-lg mx-auto">
+            {(roundResult.result === 'WIN' || roundResult.result === 'LOSE' || roundResult.result === 'DRAW') && (
+              <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 w-24 h-24 rounded-full border-4 border-[#4FB3FF] bg-[#0F1A23] overflow-hidden shadow-[0_0_20px_rgba(79,179,255,0.3)] z-10">
+                <img
+                  src={
+                    roundResult.result === 'LOSE' ? '/sheldon-feliz.png' :
+                      roundResult.result === 'WIN' ? '/sheldon-triste.png' :
+                        '/sheldon-empate.png'
+                  }
+                  alt={
+                    roundResult.result === 'LOSE' ? 'Sheldon Feliz' :
+                      roundResult.result === 'WIN' ? 'Sheldon Triste' :
+                        'Sheldon Empate'
+                  }
+                  className="w-full h-full object-cover"
+                />
               </div>
-            ) : commentary ? (
-              <p className="italic text-lg text-white font-medium">"{commentary}"</p>
-            ) : (
-              <p className="text-gray-400 text-sm opacity-50">Waiting for smart remark...</p>
             )}
+
+            <div className="bg-[#1E6A8F]/20 border border-[#4FB3FF]/30 p-6 pt-16 rounded-xl min-h-[120px] relative">
+              <span className="absolute top-2 left-1/2 transform -translate-x-1/2 text-[#4FB3FF]/50 text-[10px] font-bold uppercase tracking-widest">
+                Sheldon Diz
+              </span>
+              {loadingCommentary ? (
+                <div className="flex items-center justify-center h-full pt-2">
+                  <div className="animate-pulse text-[#4FB3FF]">Thinking...</div>
+                </div>
+              ) : commentary ? (
+                <p className="italic text-lg text-white font-medium">"{commentary}"</p>
+              ) : (
+                <p className="text-gray-400 text-sm opacity-50 pt-2">Waiting for smart remark...</p>
+              )}
+            </div>
           </div>
         </div>
 
